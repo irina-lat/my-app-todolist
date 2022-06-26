@@ -31,9 +31,9 @@ export function Todolist(props: todolistType) {
                     )
                 })}
 
-                {/*<li><input type="checkbox" checked={true}/><span>Html&Css</span></li>*/}
-                {/*<li><input type="checkbox" checked={true}/><span>Js</span></li>*/}
-                {/*<li><input type="checkbox" checked={false}/><span>React</span></li>*/}
+                {/*<li><input type="checkbox" checked={props.tasks1[0].isDone}/> <span>{props.tasks1[0].title}</span></li>*/}
+                {/*<li><input type="checkbox" checked={props.tasks1[1].isDone}/> <span>{props.tasks1[1].title}</span></li>*/}
+                {/*<li><input type="checkbox" checked={props.tasks1[2].isDone}/> <span>{props.tasks1[2].title}</span></li>*/}
             </ul>
             <div>
                 <button>All</button>
