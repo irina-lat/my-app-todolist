@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
+
 
 type todolistType = {
     title: string,
-    tasks1: tasks1Type[],
-    // tasks2?: tasks2Type[]
+    tasks: tasks1Type[],
+    removeTask: (elid: number) => void,
 }
 
 type tasks1Type = {
@@ -12,33 +13,46 @@ type tasks1Type = {
     isDone: boolean
 }
 
-// type tasks2Type = {
-//     id: number,
-//     title: string,
-//     isDone: boolean
-// }
-
 export function Todolist(props: todolistType) {
+
+    const [filterValue, setFilterValue] = useState('all')
+
+    let filtredTasks = props.tasks
+
+    if (filterValue === 'Active') {
+        filtredTasks = props.tasks.filter(el => el.isDone)
+    }
+
+    if (filterValue === 'Complited') {
+        filtredTasks = props.tasks.filter(el => !el.isDone)
+    }
+
+    const changeTasksFilter = (buttonName: string) => {
+        setFilterValue(buttonName)
+    }
+
     return (
         <div>
             <h3>{props.title}</h3>
             <input type="text"/>
             <button>+</button>
             <ul>
-                {props.tasks1.map((tasks1Array) => {
+                {filtredTasks.map((el) => {
                     return (
-                        <li key={tasks1Array.id} ><input type="checkbox" checked={tasks1Array.isDone}/><span>{tasks1Array.title}</span></li>
+                        <li key={el.id}>
+                            <button onClick={() => props.removeTask(el.id)}>x</button>
+                            {/*<button onClick={()=>(props.removeTask())} >x</button>*/}
+                            <input type="checkbox" checked={el.isDone}/>
+                            <span>{el.title}</span>
+                        </li>
+
                     )
                 })}
-
-                {/*<li><input type="checkbox" checked={props.tasks1[0].isDone}/> <span>{props.tasks1[0].title}</span></li>*/}
-                {/*<li><input type="checkbox" checked={props.tasks1[1].isDone}/> <span>{props.tasks1[1].title}</span></li>*/}
-                {/*<li><input type="checkbox" checked={props.tasks1[2].isDone}/> <span>{props.tasks1[2].title}</span></li>*/}
             </ul>
             <div>
-                <button>All</button>
-                <button>Active</button>
-                <button>Complited</button>
+                <button onClick={() => changeTasksFilter('All')}>All</button>
+                <button onClick={() => changeTasksFilter('Active')}>Active</button>
+                <button onClick={() => changeTasksFilter('Complited')}>Complited</button>
             </div>
         </div>
     );
