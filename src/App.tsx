@@ -3,6 +3,7 @@ import './App.css';
 import {Todolist} from './Todolist';
 import {v1} from "uuid";
 
+
 export type FilterValuesType = "all" | "active" | "completed";
 
 function App() {
@@ -42,9 +43,20 @@ function App() {
         setFilter(value);
     }
 
+    const changeIsDone =(newId:string, value:boolean)=>{
+        setTasks(tasks.map(el=>el.id === newId ? {...el, isDone: value} : el))
+    }
+
+    const [value, setValue]=useState(false)
+    const change =()=> {
+        setValue(!value)
+    }
+
     return (
         <div className="App">
             <Todolist
+                filter={filter}
+                changeIsDone={changeIsDone}
                 title="What to learn"
                 tasks={tasksForTodolist}
                 removeTask={removeTask}
