@@ -20,8 +20,6 @@ type PropsType = {
 
 export function Todolist(props: PropsType) {
     const [newTitle, setNewTitle] = useState('')
-    console.log(newTitle)
-
     const [error, setError] = useState<string | null>(null)
 
     const addTaskHandler = () => {
@@ -31,6 +29,10 @@ export function Todolist(props: PropsType) {
         } else {
             setError("Title is required")
         }
+    }
+
+    const removeTaskHandler = (tID: string) => {
+        props.removeTask(tID)
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -44,23 +46,8 @@ export function Todolist(props: PropsType) {
         }
     }
 
-    // const allChangeFilter=()=>{
-    //     props.changeFilter("all")
-    // }
-    //
-    // const activeChangeFilter=()=>{
-    //     props.changeFilter("active")
-    // }
-    //
-    // const completedChangeFilter=()=>{
-    //     props.changeFilter("completed")
-    // }
     const tsarChangeFilter = (valueFilter: FilterValuesType) => {
         props.changeFilter(valueFilter)
-    }
-
-    const removeTaskHandler = (tID: string) => {
-        props.removeTask(tID)
     }
 
     function onChangeHandlerInput(newId: string, checkboxValue: boolean) {
@@ -82,12 +69,9 @@ export function Todolist(props: PropsType) {
 
             <ul>
                 {props.tasks.map(t => {
-                        // function onChangeHandlerInput(event: ChangeEvent<HTMLInputElement>) {
-                        //     props.changeIsDone(t.id, event.currentTarget.checked)
-                        // }
 
                         return (
-                            <li key={t.id}>
+                            <li key={t.id} className={t.isDone ? cl.isDone : ''}>
                                 <input onChange={(event: ChangeEvent<HTMLInputElement>)=>onChangeHandlerInput(t.id, event.currentTarget.checked)} type="checkbox" checked={t.isDone}/>
                                 <span>{t.title}</span>
                                 <button onClick={() => removeTaskHandler(t.id)}>x</button>
