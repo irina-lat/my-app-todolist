@@ -74,9 +74,9 @@ function App() {
         }
     }
 
-    const changeStatus = (newId: string, value: boolean, todolistId: string) => {
+    const changeStatus = (id: string, value: boolean, todolistId: string) => {
         const tasks = taskObj[todolistId]
-        let task = tasks.find(task => task.id === newId)
+        let task = tasks.find(task => task.id === id)
         if (task) {
             task.isDone = value
         }
@@ -87,6 +87,23 @@ function App() {
         let todolist: TodolistType = {id: todolistId1, title: title, filter: "all"}
         setTodolists([todolist, ...todolists])
         setTask({ ...taskObj, [todolist.id] : [] })
+    }
+
+    function changeTasksTitle (id: string, newTitle: string, todolistId: string) {
+        const tasks = taskObj[todolistId]
+        let task = tasks.find(task => task.id === id)
+        if (task) {
+            task.title = newTitle
+        }
+        setTask({...taskObj})
+    }
+
+    function changeTodolistTitle (newTitle: string, todolistId: string) {
+        const todolist = todolists.find(f => f.id === todolistId)
+        if(todolist){
+            todolist.title = newTitle
+        }
+        setTodolists([...todolists])
     }
 
     return (
@@ -117,6 +134,8 @@ function App() {
                         changeFilter={changeFilter}
                         addTask={addTask}
                         removeTodolist={removeTodolist}
+                        changeTasksTitle={changeTasksTitle}
+                        changeTodolistTitle={changeTodolistTitle}
                     />)
             })}
 
