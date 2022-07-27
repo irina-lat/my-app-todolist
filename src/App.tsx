@@ -57,7 +57,7 @@ function App() {
         setTask({...taskObj})
     }
 
-    const addItem = (newTitle: string, todolistId: string) => {
+    const addTask = (newTitle: string, todolistId: string) => {
         let task = {id: v1(), title: newTitle, isDone: false}
         let tasks = taskObj[todolistId]
         let newTask = [task, ...tasks]
@@ -83,15 +83,13 @@ function App() {
         setTask({...taskObj})
     }
 
-    const [value, setValue] = useState(false)
-    const change = () => {
-        setValue(!value)
-    }
-
 
     return (
         <div className="App">
-            <AddItemForm id={'yyyy'} addItem={()=> {}}/>
+
+            <AddItemForm addItem={ (title: string)=> {alert('jjj')} }/>
+
+
             {todolists.map(tl => {
                 let tasksForTodolist = taskObj[tl.id];
 
@@ -112,7 +110,7 @@ function App() {
                         tasks={tasksForTodolist}
                         removeTask={removeTask}
                         changeFilter={changeFilter}
-                        addItem={addItem}
+                        addTask={addTask}
                         removeTodolist={removeTodolist}
                     />)
             })}
