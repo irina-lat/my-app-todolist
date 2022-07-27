@@ -84,7 +84,7 @@ function App() {
     }
 
     function addTodolist (title: string) {
-        let todolist: TodolistType = {id: todolistId1, title: "Whats to learn", filter: "all"}
+        let todolist: TodolistType = {id: todolistId1, title: title, filter: "all"}
         setTodolists([todolist, ...todolists])
         setTask({ ...taskObj, [todolist.id] : [] })
     }
