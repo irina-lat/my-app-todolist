@@ -17,6 +17,7 @@ type TodolistType = {
 }
 
 function App() {
+
     let todolistId1 = v1()
     let todolistId2 = v1()
 
@@ -39,6 +40,7 @@ function App() {
         ]
     })
 
+
     const removeTodolist = (todolistId: string)=> {
         const filteredTodolist = todolists.filter(tl => tl.id !== todolistId)
         setTodolists(filteredTodolist)
@@ -50,7 +52,6 @@ function App() {
     function removeTask(id: string, todolistId: string) {
         let tasks = taskObj[todolistId]
         let filteredTasks = taskObj[todolistId].filter((t: any) => t.id != id)
-        // let filteredTasks = taskObj.filter(t => t.id != id)
         taskObj[todolistId] = filteredTasks
         setTask({...taskObj})
     }
@@ -89,7 +90,7 @@ function App() {
 
     return (
         <div className="App">
-
+            <input type="text"/> <button>+</button>
             {todolists.map(tl => {
                 let tasksForTodolist = taskObj[tl.id];
 
