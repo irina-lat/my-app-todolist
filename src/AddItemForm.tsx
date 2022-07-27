@@ -3,7 +3,7 @@ import cl from "./Toodolist.module.css";
 
 type AddItemFormPropsType = {
     id: string
-    addTask: (newTitle: string, todolistId: string) => void
+    addItem: (newTitle: string, todolistId: string) => void
 }
 
 function AddItemForm(props: AddItemFormPropsType) {
@@ -13,7 +13,7 @@ function AddItemForm(props: AddItemFormPropsType) {
 
     const addTaskHandler = () => {
         if (newTitle.trim() !== '') {
-            props.addTask(newTitle.trim(), props.id)
+            props.addItem(newTitle.trim(), props.id)
             setNewTitle('')
         } else {
             setError("Title is required")
