@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import cl from "./Toodolist.module.css"
+import {TextField} from "@material-ui/core";
 
 type EditableSpanPropsType = {
     title: string
@@ -24,7 +25,7 @@ function EditableSpan(props: EditableSpanPropsType) {
 
     return (
         editMode
-            ? <input value={title} onChange={onChangeTitleHandler} type="text" onBlur={activateViewMode} autoFocus />
+            ? <TextField value={title} onChange={onChangeTitleHandler} type="text" onBlur={activateViewMode} autoFocus />
             : <span onDoubleClick={activateEditMode}>{props.title}</span>
     )
 }

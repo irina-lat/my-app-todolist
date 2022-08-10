@@ -1,6 +1,7 @@
-import { Button } from "@material-ui/core";
+import {IconButton, TextField} from "@material-ui/core";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import cl from "./Toodolist.module.css";
+import {ControlPoint} from "@material-ui/icons";
 
 type AddItemFormPropsType = {
     addItem: (newTitle: string) => void
@@ -34,14 +35,18 @@ function AddItemForm(props: AddItemFormPropsType) {
 
     return (
         <div>
-            <input className={error ? cl.error : ''}
-                   onKeyDown={onKeyDownHandler}
-                   value={newTitle}
-                   onChange={onChangeHandler}
+            <TextField
+                variant={'outlined'}
+                label={'Type Value'}
+                onKeyDown={onKeyDownHandler}
+                value={newTitle}
+                onChange={onChangeHandler}
+                error={!!error}
+                helperText={error}
             />
-            {/*<button onClick={addTaskHandler}>+</button>*/}
-            <Button onClick={addTaskHandler} variant={"contained"} color={"primary"}>+</Button>
-            {error && <div className={cl.errorMessage}>{error}</div>}
+            <IconButton onClick={addTaskHandler} color={"primary"}>
+                <ControlPoint/>
+            </IconButton>
         </div>
     )
 }
