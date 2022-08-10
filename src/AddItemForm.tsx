@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import cl from "./Toodolist.module.css";
 
@@ -38,7 +39,8 @@ function AddItemForm(props: AddItemFormPropsType) {
                    value={newTitle}
                    onChange={onChangeHandler}
             />
-            <button onClick={addTaskHandler}>+</button>
+            {/*<button onClick={addTaskHandler}>+</button>*/}
+            <Button onClick={addTaskHandler} variant={"contained"} color={"primary"}>+</Button>
             {error && <div className={cl.errorMessage}>{error}</div>}
         </div>
     )
